@@ -1,0 +1,23 @@
+# Node modules (if using npm)
+node_modules/
+
+# Build output / dist folders
+dist/
+build/
+
+# System files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# IDE files
+.vscode/
+.idea/
+
+# Tailwind or other generated CSS (optional)
+*.css.map
+
+# json files
+*.json
