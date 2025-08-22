@@ -154,3 +154,50 @@ listBtn.addEventListener("click", () => {
     gridBtn.classList.add("bg-gray-200", "text-black");
     gridBtn.classList.remove("bg-[#e95a08]", "text-white");
 });
+
+
+let promoApplied = false;
+
+const promoInput = document.getElementById("promoInput");
+const applyPromoBtn = document.getElementById("applyPromo");
+const promoMessage = document.getElementById("promoMessage");
+const cartTotalCartEl = document.getElementById("cartTotalCart"); // Total in summary
+
+applyPromoBtn.addEventListener("click", () => {
+  if (cart.length === 0) {
+    promoMessage.textContent = "Your cart is empty!";
+    return;
+  }
+
+  const code = promoInput.value.trim().toLowerCase();
+
+  if (promoApplied) {
+    promoMessage.textContent = "Promo code has already been applied.";
+    return;
+  }
+
+  let discount = 0;
+
+  if (code === "ostad10") {
+    discount = 0.1;
+  } else if (code === "ostad50") {
+    discount = 0.5;
+  } else {
+    promoMessage.textContent = "Invalid Promo Code";
+    return;
+  }
+
+  // Apply discount
+  let total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+  const discountedTotal = total - total * discount;
+
+  cartTotalEl.forEach(el => el.textContent = discountedTotal.toFixed(2));
+  cartTotalCartEl.textContent = discountedTotal.toFixed(2);
+
+  promoApplied = true;
+  promoMessage.textContent = `Promo applied! You got ${discount * 100}% off.`;
+  promoMessage.classList.remove("text-red-500");
+  promoMessage.classList.add("text-green-500");
+});
+
+
